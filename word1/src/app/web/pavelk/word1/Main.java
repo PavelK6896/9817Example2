@@ -2,6 +2,7 @@ package app.web.pavelk.word1;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,3 +47,38 @@ class Main2 {
         Files.write(Paths.get("word1/src/app/web/pavelk/word1/new2.txt"), collect, CREATE);
     }
 }
+
+
+/**
+ * dictionary for android
+ */
+class Main3 {
+    public static void main(String[] args) throws IOException {
+
+        List<String> list = Files.readAllLines(Paths.get("word1/src/app/web/pavelk/word1/text.txt"));
+
+
+        Path path = Paths.get("word1/src/app/web/pavelk/word1/raw");
+        Files.list(path).forEach(f -> {
+            try {
+                Files.delete(f);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        Files.deleteIfExists(path);
+        Files.createDirectory(path);
+
+        int dic = 0;
+        List<String> collect = new ArrayList<>();
+        for (int j = 0; j < list.size(); j++) {
+            String[] split = list.get(j).split(" -- ");
+            if (j % 100 == 0 && j != 0) {
+                Files.write(Paths.get("word1/src/app/web/pavelk/word1/raw/dictionary" + ++dic + ".txt"), collect, CREATE);
+                collect = new ArrayList<>();
+            }
+            collect.add(split[0] + "\"" + split[1]);
+        }
+    }
+}
+
