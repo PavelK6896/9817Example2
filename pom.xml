@@ -19,6 +19,7 @@
         <module>hibernate1</module>
         <module>db1</module>
         <module>codeabbey1</module>
+        <module>opencsv1</module>
     </modules>
 
     <properties>
