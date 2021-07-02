@@ -20,6 +20,9 @@
         <module>db1</module>
         <module>codeabbey1</module>
         <module>opencsv1</module>
+        <module>word2</module>
+        <module>jackson1</module>
+        <module>word3</module>
     </modules>
 
     <properties>
