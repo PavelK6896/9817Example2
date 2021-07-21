@@ -24,6 +24,7 @@
         <module>jackson1</module>
         <module>word3</module>
         <module>lombok1</module>
+        <module>profiler1</module>
     </modules>
 
     <properties>
