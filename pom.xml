@@ -25,6 +25,7 @@
         <module>word3</module>
         <module>lombok1</module>
         <module>profiler1</module>
+        <module>word4</module>
     </modules>
 
     <properties>
