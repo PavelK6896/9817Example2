@@ -82,4 +82,41 @@ class Main3 {
     }
 }
 
+/**
+ * generate json
+ */
+class Main4 {
+    public static void main(String[] args) throws IOException {
 
+        List<String> lines = Files.readAllLines(Paths.get("word2/word2.txt"), Charset.forName("windows-1251"));
+        lines.replaceAll(f -> f.replace("\"", "'"));
+        lines.replaceAll(f -> f.replace("\t", " "));
+        int dic = 1000;
+        String s1 = " \"dictionary";
+        String s2 = "\" : [";
+        String s3 = "],\n";
+
+        List<String> collect = new ArrayList<>();
+        collect.add("{");
+        collect.add(s1 + dic + s2);
+
+        boolean start = true;
+        for (int j = 0; j < lines.size(); j = j + 2) {
+            if (j % 500 == 0 && j != 0) {
+                collect.add(s3 + s1 + ++dic + s2);
+            } else {
+                if (!start) {
+                    String s = collect.get(collect.size() - 1) + ",";
+                    collect.set(collect.size() - 1, s);
+                } else {
+                    start = false;
+                }
+            }
+            collect.add("[\"" + lines.get(j) + "\",\"" + lines.get(j + 1) + "\"]");
+        }
+        collect.add("]\n");
+        collect.add("}");
+
+        Files.write(Paths.get("word2/word2-4.json"), collect, StandardOpenOption.CREATE);
+    }
+}
