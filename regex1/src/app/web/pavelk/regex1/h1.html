@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<input id="i1" placeholder="i1"/>
+<input id="i2" placeholder="i2"/>
+<input id="i3" placeholder="i3"/>
+<script>
+
+    let i1 = document.getElementById('i1');
+    i1.oninput = (ev) => {
+        let position = i1.selectionStart;
+        const v1 = ev.target.value.replace(/\D/g, '')
+        const v2 = v1.slice(0, 5)
+        ev.target.value = v2
+        i1.selectionEnd = position;
+    };
+
+    let i2 = document.getElementById('i2');
+    i2.oninput = (ev) => {
+        let position = ev.target.selectionStart;
+        const v1 = ev.target.value.replace(/\D/g, '')
+        const v2 = v1.slice(0, 5)
+        ev.target.value = v2
+        ev.target.selectionEnd = position;
+    };
+
+    let i3 = document.getElementById('i3');
+    let old3
+    i3.oninput = (ev) => {
+        let match = ev.target.value.match(/\b\d{0,5}\b/g);
+        if (match != null && match[0] !== '') {
+            old3 = ev.target.value = match[0]
+        } else {
+            ev.target.value = old3
+        }
+    };
+
+</script>
+</body>
+</html>
