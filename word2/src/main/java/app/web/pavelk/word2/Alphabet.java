@@ -1,4 +1,4 @@
-package app.web.pacelk.word2;
+package app.web.pavelk.word2;
 
 
 import lombok.AllArgsConstructor;

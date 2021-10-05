@@ -1,4 +1,4 @@
-package app.web.pacelk.word2;
+package app.web.pavelk.word2;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -118,5 +118,30 @@ class Main4 {
         collect.add("}");
 
         Files.write(Paths.get("word2/word2-4.json"), collect, StandardOpenOption.CREATE);
+    }
+}
+
+/**
+ * by the number of letters
+ */
+class Main5 {
+    public static void main(String[] args) throws IOException {
+        var lines = Files.readAllLines(Paths.get("word2/word2.txt"), Charset.forName("windows-1251"));
+        ArrayList<String> arr2 = new ArrayList<>();
+        ArrayList<String> arr3 = new ArrayList<>();
+        ArrayList<String> arr4 = new ArrayList<>();
+        for (int i = 0; i < lines.size(); i = i + 2) {
+            String s = lines.get(i);
+            if (s.length() == 2) {
+                arr2.add(s + " " + lines.get(i + 1));
+            } else if (s.length() == 3) {
+                arr3.add(s + " " + lines.get(i + 1));
+            } else if (s.length() == 4) {
+                arr4.add(s + " " + lines.get(i + 1));
+            }
+        }
+        Files.write(Paths.get("word2/two.txt"), arr2, StandardOpenOption.CREATE);
+        Files.write(Paths.get("word2/three.txt"), arr3, StandardOpenOption.CREATE);
+        Files.write(Paths.get("word2/four.txt"), arr4, StandardOpenOption.CREATE);
     }
 }
