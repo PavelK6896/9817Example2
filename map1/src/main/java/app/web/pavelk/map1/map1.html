@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: powderblue;
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        p {
+            color: red;
+        }
+
+
+        .div1 {
+            margin: 5px;
+        }
+
+
+        .main1 {
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div class="main1">
+    <div id="d1" class="div1"></div>
+    <div id="d2" class="div1"></div>
+    <div id="d3" class="div1"></div>
+    <div id="d4" class="div1"></div>
+</div>
+
+<script>
+    let t = [{id: 1, number: 15, code: 4}, {id: 2, number: 15, code: 4}, {id: 3, number: 65, code: 4},]
+    let o = {
+        parts: [],
+        save: false
+    }
+
+    let md = [1, 2]
+    let size = 2e3;
+    for (let i = 0; i < 500; i++) {
+        md.push(Math.floor(Math.random() * (size - 3) + 3))
+    }
+    let dMap = new Map();
+    md.forEach((item, i, arr) => {
+        dMap.set(item, true)
+    })
+
+
+    console.time("ac");
+    for (let i = 0; i < size; i++) {
+        o.parts.push({id: i, number: 15, code: 4})
+    }
+    console.time("ac");
+
+    console.time("mc");
+    let map = new Map();
+    o.parts.forEach((item, i, arr) => {
+        map.set(item.id, item)
+    })
+    console.timeEnd("mc");
+
+    console.time("mg");
+    o.parts.forEach((item, i, arr) => {
+        map.get(item.id)
+    })
+    console.timeEnd("mg");
+
+    console.time("oc");
+    let obj = {};
+    o.parts.forEach((item, i, arr) => {
+        obj[item.id] = item;
+    })
+    console.timeEnd("oc");
+
+    console.time("og");
+    o.parts.forEach((item, i, arr) => {
+        let ee = obj[item.id]
+    })
+    console.timeEnd("og");
+
+    console.time("oc3");
+    let parts2 = [...o.parts]
+    console.timeEnd("oc3");
+
+    console.time("oc4");
+    let o2 = Object.values(obj)
+    console.timeEnd("oc4");
+
+    function addElement4() {
+        let p = document.getElementById('d4');
+        p.innerHTML = '';
+        const b500 = document.createElement('button');
+        b500.textContent = 'b500'
+        b500.onclick = () => {
+            console.time("500do4");
+            obj = Object.values(obj).filter((n) => {
+                return !dMap.get(n.id)
+            })
+            console.timeEnd("500do4");
+            console.log(obj)
+            addElement4();
+        }
+        p.appendChild(b500);
+
+        Object.values(obj).forEach((item, i, arr) => {
+            const div = document.createElement('div');
+            div.setAttribute("id", "Div" + i);
+            div.textContent = i + " = " + item.id
+
+            const button = document.createElement('button');
+            button.onclick = () => {
+                console.time("do4");
+                obj = Object.values(obj).filter((n) => {
+                    return n.id !== item.id
+                })
+                console.timeEnd("do4");
+                console.log(obj)
+                addElement4();
+            }
+            button.textContent = item.id
+            div.appendChild(button);
+            p.appendChild(div);
+        });
+    }
+
+    addElement4();
+
+
+    function addElement3() {
+        let p = document.getElementById('d3');
+        p.innerHTML = '';
+
+        const b500 = document.createElement('button');
+        b500.textContent = 'b500'
+        b500.onclick = () => {
+            console.time("500da3");
+            parts2 = parts2.filter((n) => {
+                return !dMap.get(n.id)
+            })
+            console.timeEnd("500da3");
+            console.log(parts2)
+            addElement3();
+        }
+        p.appendChild(b500);
+
+        parts2.forEach((item, i, arr) => {
+            const div = document.createElement('div');
+            div.setAttribute("id", "Div" + i);
+            div.textContent = i + " = " + item.id
+
+            const button = document.createElement('button');
+            button.onclick = () => {
+                console.time("da3");
+                parts2.splice(i, 1)
+                console.timeEnd("da3");
+                console.log(parts2)
+                addElement3();
+            }
+            button.textContent = item.id
+            div.appendChild(button);
+            p.appendChild(div);
+        });
+    }
+
+    addElement3();
+
+    function addElement2() {
+        let p = document.getElementById('d2');
+        p.innerHTML = '';
+
+        const b500 = document.createElement('button');
+        b500.textContent = 'b500'
+        b500.onclick = () => {
+            console.time("500dm2");
+            md.forEach(i => map.delete(i))
+            console.timeEnd("500dm2");
+
+            console.log(map)
+            addElement2();
+        }
+        p.appendChild(b500);
+
+        let iii = 0
+        map.forEach((item, i, arr) => {
+            const div = document.createElement('div');
+            div.setAttribute("id", "Div" + i);
+            div.textContent = iii++ + " = " + item.id
+
+            const button = document.createElement('button');
+            button.onclick = () => {
+                console.time("dm2");
+                map.delete(i)
+                console.timeEnd("dm2");
+
+                console.log(map)
+                addElement2();
+            }
+            button.textContent = i
+            div.appendChild(button);
+
+            p.appendChild(div);
+        })
+
+    }
+
+    addElement2()
+
+    function addElement1() {
+        let p = document.getElementById('d1');
+        p.innerHTML = '';
+
+        const b500 = document.createElement('button');
+        b500.textContent = 'b500'
+        b500.onclick = () => {
+            console.time("500da1");
+            o.parts = o.parts.filter((n) => {
+                return !md.includes(n.id)
+            })
+            console.timeEnd("500da1");
+            console.log(o.parts)
+            addElement1();
+        }
+        p.appendChild(b500);
+
+
+        o.parts.forEach((item, i, arr) => {
+            const div = document.createElement('div');
+            div.setAttribute("id", "Div" + i);
+            div.textContent = i + " = " + item.id
+
+            const button = document.createElement('button');
+            button.onclick = () => {
+                console.time("da1");
+                o.parts = o.parts.filter((n) => {
+                    return n.id !== item.id
+                })
+                console.timeEnd("da1");
+                console.log(o.parts)
+                addElement1();
+            }
+            button.textContent = item.id
+            div.appendChild(button);
+            p.appendChild(div);
+        });
+    }
+
+    addElement1();
+</script>
+
+</body>
+</html>

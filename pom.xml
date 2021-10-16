@@ -27,6 +27,7 @@
         <module>profiler1</module>
         <module>word4</module>
         <module>jsoup1</module>
+        <module>map1</module>
     </modules>
 
     <properties>
