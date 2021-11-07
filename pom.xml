@@ -29,6 +29,7 @@
         <module>jsoup1</module>
         <module>map1</module>
         <module>word6</module>
+        <module>word7</module>
     </modules>
 
     <properties>
