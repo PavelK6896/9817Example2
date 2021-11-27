@@ -30,6 +30,7 @@
         <module>map1</module>
         <module>word6</module>
         <module>word7</module>
+        <module>cryptography1</module>
     </modules>
 
     <properties>
