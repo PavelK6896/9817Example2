@@ -31,6 +31,7 @@
         <module>word6</module>
         <module>word7</module>
         <module>cryptography1</module>
+        <module>shell1</module>
     </modules>
 
     <properties>
