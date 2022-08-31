@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.util.Arrays;
 
-class Main1 {
+class MainAES {
     public static void main(String[] args) throws NoSuchPaddingException, NoSuchAlgorithmException,
             InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
 

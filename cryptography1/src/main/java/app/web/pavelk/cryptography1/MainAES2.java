@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -19,10 +21,11 @@ import java.util.Scanner;
 
 //Симметричное шифрование RC4, AES, DES, 3DES, QUAD
 //Асимметричное шифрование RSA, Diffie-Hellman, ECC, El Gamal, DSA
-public class Main2 {
+public class MainAES2 {
     public static void main(String[] args) throws NoSuchPaddingException, NoSuchAlgorithmException,
             InvalidAlgorithmParameterException, InvalidKeyException, IllegalBlockSizeException,
             BadPaddingException, InvalidKeySpecException, IOException {
+        Files.createDirectories(Path.of("cryptography1/aes2"));
 
         String password1 = "trerwewrw";
         String password = new Scanner(System.in).next();
@@ -32,11 +35,11 @@ public class Main2 {
         IvParameterSpec ivParameterSpec2 = generateIv2(password);
         SecretKey secretKey = getKeyFromPassword(password, salt);
 
-        File f1 = new File("cryptography1/f1.zip");
-        File f2 = new File("cryptography1/f2.zip");
-        File f3 = new File("cryptography1/f3.zip");
+        File f1 = new File("cryptography1/aes2/f1.zip");
+        File f2 = new File("cryptography1/aes2/f2c.zip");
+        File f3 = new File("cryptography1/aes2/f3f.zip");
 
-        encryptFile(algorithm, secretKey, ivParameterSpec , f1, f2);
+        encryptFile(algorithm, secretKey, ivParameterSpec, f1, f2);
 //        decryptFile(algorithm, secretKey, ivParameterSpec2, f2, f3);
     }
 
